@@ -44,19 +44,19 @@ const toDoList = new mongoose.model('item', itemsSchema);
 // const workList = new mongoose.model('worklist', workListSchema);
 const List = new mongoose.model('List', listSchema);
 
-const eatFood = new toDoList({
-  name : "Eat Food"
+const Welcome = new toDoList({
+  name : "Welcome to our To Do List"
 });
 
-const buyFood = new toDoList({
-  name : "Buy Food"
+const addItem = new toDoList({
+  name : "Hit the + button to add items"
 });
 
-const makeFood = new toDoList({
-  name : "Make Food"
+const removeItem = new toDoList({
+  name : "Hit the check box to delete the item"
 });
 
-let defaultItems = [eatFood, makeFood, buyFood];
+let defaultItems = [Welcome, addItem, removeItem];
 
 app.get("/", function(req, res) {
 
@@ -72,9 +72,6 @@ app.get("/", function(req, res) {
         toDoList.insertMany(defaultItems, function(err){
           if(err){
             console.log(err);
-          }
-          else{
-            console.log("Successfully items added");
           }
         });
         res.render("list", {listTitle : day, newListItems : defaultItems});
@@ -106,17 +103,6 @@ app.post("/", function(req, res){
   }
 });
 
-// app.get("/work", function(req,res){
-//   workList.find({}, function(err, workItems){
-//      if(err){
-//         console.log(err);
-//      }
-//      else{
-//         res.render("list", {listTitle: "Work List", newListItems: workItems});     
-//      }
-//    });
-// });
-
 app.get('/:customListName', function(req, res){
   const listName = _.upperFirst(req.params.customListName);
   // console.log(listName);
@@ -132,7 +118,6 @@ app.get('/:customListName', function(req, res){
         res.redirect("/"+listName);
       }
       else{
-        // console.log(listName);
         res.render("list",{listTitle:listName, newListItems: foundList.items}) ;
       }
     }
