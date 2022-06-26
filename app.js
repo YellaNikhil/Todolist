@@ -9,7 +9,7 @@ const _ = require('lodash');
 const app = express();
 
 // const url = 'mongodb://0.0.0.0:27017/todolist';
-const url = 'mongodb+srv://<username>:<password>@cluster0.9aggl6q.mongodb.net/toDoList?retryWrites=true&w=majority'
+const url = 'use your mongodb atlas url with username & password';
 
 app.set('view engine', 'ejs');
 
